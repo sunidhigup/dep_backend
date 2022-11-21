@@ -1,0 +1,101 @@
+server:
+  port: 5000
+  servlet:
+    context-path:
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  main:
+    allow-circular-references: true
+  profiles:
+    active: qa
+  jpa:
+    database: default
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      use-new-id-generator-mappings: false
+
+    show-sql: false
+    open-in-view: false
+
+    properties:
+      hibernate:
+        show:
+          sql: true
+        use_sql_comments: true
+        format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time-zone: UTC
+        lob:
+          non_contextual_creation: true
+        event:
+          merge:
+            entity_copy_observer: allow
+  jackson:
+    default-property-inclusion: null
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://dep-database-us-east-1.c8xgxyogjacf.us-east-1.rds.amazonaws.com:5432/dep_postgres?stringtype=unspecified
+    username: postgres
+    password: SuOYMwYRBYNPzK1y1fqn
+
+
+    initialization-mode: always
+    hikari:
+      maximum-pool-size: 2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: loggers
+  endpoint:
+    loggers:
+      enabled: true
+
+aws:
+  oracle:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@oracle-test.c8xgxyogjacf.us-east-1.rds.amazonaws.com:1521:ORCL
+    url: jdbc:oracle:thin:@oracle-snp-db.c8xgxyogjacf.us-east-1.rds.amazonaws.com:1521:ORCL
+    username: admin
+    password: admin123
+  dynamo:
+    endpoint: https://dynamodb.us-east-1.amazonaws.com
+  region: us-east-1
+  accessKey: ASIA55ANROHJJNHVMPJI
+  secretKey: Ks7Iyn/5Egtct3cG9/ZREgKMosXv/2QhQAd3LSdz
+  sessionToken: IQoJb3JpZ2luX2VjEIz//////////wEaCXVzLWVhc3QtMSJIMEYCIQCF4+73U/ju02qYtjDOZa63JatGNyZy5jkVjyGLa5FWmQIhAPnR6r/Zr8vtL+QPmB4yzuiaSnkQHoI+jiv4doln+QKdKokDCIX//////////wEQARoMOTU1NjU4NjI5NTg2Igy/wtxZdVZOFo8Ji+4q3QLCpK/MqOt6JgITvW1LtgGnnayMuh7C3+HbdCCl3oFUSp5sagiz0gYGOuO5MgiL7rKXUMUXV4hCmmqAIGV5I3IHu34NkdfASdQmtH0ohHRHdeMuZqXZG5izyO+nymRQGBsrpOz8KnhL2BBYIwVxCXLg6pUS/7NKMvBk4BGrVgeuVyzHphEWcEtmL6N8QpuliiTN9yoskepmomHbZaIYxKHL3GJuKQm5c5lOO08nH9BQifLkh9GiwaMP7wEyqdn7VQE0ryJ2HN69mkE/tUjqjwahRbuDe/bFkTCd/5BI/mr3+1EJqLgmTEKvbCs/GQiCSDgRNbbueaTRDNI9+16yDyX/DmfLNN90ifmLE7+vTx8rfGHcFwbq30nsP2zoko44tO7+BUKyAsTS4VMmKDNQpHabRbWsfSwjKZiZxumihDA1YgkBQ+qxkmsaAcNBVvZMFkOqVdQjVSNGdK21P6RsMNiOt5sGOqUBfk+1GfzdqDNiDCx6rz0JmQf6mnV+whDfRbAzX0pokFCwdfISQoVe1RzgqnKII3yE/e2JeyvHFy1T7xiIkfF2g9CLWhWhu7pBkQ11eBNJWIg0hvDLIYvhaHlZWKL9KxWrZ6xyIXpcjwMhx0ulOpng+Jb7l/3VbADxQKv3Dbv+yxA4J3eF3UY8Mzf4TxyLoVED3m2ppw45BxC03flnT4zm20dB0Hnj
+
+  dataProcessor:
+    logGroupName: /aws/vendedlogs/states/CDEP_STATE_MACHINE_1-Logs
+  ruleEngine:
+    logGroupName: cdep_rule_engine_logs
+  preprocessor:
+    logGroupName: DEP_Pre_Processor
+    fargateLogGroupName: DEP_Pre_Processor
+  IAMRoleARN: arn:aws:iam::955658629586:role/service-role/StepFunctions-Cdep_resource_management-role-3afb1986
+  flowBuilderJsonLocation: Data_Processor/Scripts
+  cognito:
+    clientId: 36s3558eskol113gbpmqje6htd
+    poolID: us-east-1_fEo1SnyZu
+  logGroupName: /aws/vendedlogs/states/CDEP_STATE_MACHINE_1-Logs
+  glue:
+    IAMRoleARN: arn:aws:iam::955658629586:role/aws-glue
+    glewDbName: dep_dtacatalog
+    s3GlewTargetPath: s3://cdep/output/valid/
+    glewCrawlerName: dep_crawler
+  athena:
+    queryOuputLocation: s3://test-athena-query-dep/
+  preProcessLambdaFunctn: arn:aws:lambda:us-east-1:955658629586:function:dep_landing
+  preProcessZipStepFunction: arn:aws:states:us-east-1:955658629586:stateMachine:Cdep_preprocessor
+  pdfSteFunctnArn: arn:aws:states:us-east-1:955658629586:stateMachine:Cdep_Preprocess_PDF
+  zipSteFunctnArn: arn:aws:states:us-east-1:955658629586:stateMachine:Cdep_preprocessor
+
+jwt:
+  secret: 8iikFFdK/ZZ1rnkEPANROHJDKFCXVzLWVhc3QtMSJotgncIso

@@ -1,0 +1,63 @@
+spring.profiles.active=dev
+
+server.port=5000
+cors.urls=*
+spring.jackson.default-property-inclusion = NON_NULL
+
+spring.main.allow-circular-references = true
+jwt.secret = "8iikFFdK/ZZ1rnkEPANROHJDKFCXVzLWVhc3QtMSJotgncIso"
+
+## replace below url with your aws region (aws-region)
+aws.dynamo.endpoint=https://dynamodb.us-east-1.amazonaws.com
+
+## your aws region
+aws.region=us-east-1
+
+## aws generate aws access key after creating user
+
+aws.accessKey= ASIA55ANROHJBTOFG6DW
+## aws generate aws secret key after creating user
+
+aws.secretKey= 48pUG48x3iRIlnInDx9eMvsLBlSwcHktR5fySPLV
+## aws generate aws session token after creating user
+
+aws.sessionToken= IQoJb3JpZ2luX2VjEHsaCXVzLWVhc3QtMSJGMEQCIF7MB0k/MmMv2pD2YenIRbgj8RAijrfZBruqSZ21nls1AiB+9TtzaGnQgure1tuHoEvgG+gByHPzhv/vxwoSRgdvpCr8AggUEAEaDDk1NTY1ODYyOTU4NiIMFUUjkd+zmKjK4wkUKtkC6eG7dvIEq95pn343yXaPE4yzmLVCt99+BDYFUoKjbwJaO6WEBatIa3oj0ZiaPSH1dX36y67m5Zou7Gwk140raOpxff+nHnxz8SlRxZB4a/SxAJRc/NXtcl+p2wFWDALZK51YByFdEWDz8WHzrDy/STOvBr3pi4bstrqKowtlcdDoTGqTuv/YfXfpV5JYI6/5E9YX9eBamN4UKh//2RYL8FnLybb7tw2/n/T44gWNRQrJxUZUSFD8j/Vzk0ezbbcGMWpXBhJ0hUlL1kon/xB0dfKxECN7DC1xkeP6UYh+h96CW2z+PgscZyuYhjnyYlZM9xGd1rg82BfCaUT6ArKpfcqvzD/wdsSvGyMnByNHwSCxdXoX96r+PidMK+Ue/tnmLVO2myWELMObLni5yNRaRG1Gwa3BMriybhdRYjAqC6H66jvmEdIdOtimoCJ1Ls38IZH7ZeVHUe6JMKLj4ZgGOqcBu1mAQ4bISABENCiQwQMVNahY+qB+4Ag8ckpNvHO0d5bDoBfDNsuD1tlNiPqCIyH1FSmI9dfFmwoLvoC1WAk9PVa9d7TpAbE2q/jZsp9g1Qt6ybGfxQ7+X44enAzULBIJnA0/C1DWzNn4s9fPcYWfLOd2ZCCKZm6Y2Alb+phB94p1Oh4jz2GATQsS7V4bBPTe4tw5i0Me3La+s+sYQ8XRG+Q4/dcqZUE=
+
+aws.dataProcessor.logGroupName = /aws/vendedlogs/states/CDEP_STATE_MACHINE_1-Logs
+
+aws.ruleEngine.logGroupName = cdep_rule_engine_logs
+
+aws.preProcessor.logGroupName=DEP_Pre_Processor
+
+## The Amazon Resource Name (ARN) of the IAM role to use for the state machine.
+aws.IAMRoleARN = arn:aws:iam::955658629586:role/service-role/StepFunctions-Cdep_resource_management-role-3afb1986
+
+## S3 folder location for storing json file of data processor flow builder
+#aws.flowBuilderJsonLocation = emr/CDEP_SCRIPTS/
+aws.flowBuilderJsonLocation = Data_Processor/Scripts
+
+aws.cognito.clientId = 36s3558eskol113gbpmqje6htd
+
+aws.cognito.poolID = us-east-1_fEo1SnyZu
+
+aws.logGroupName = /aws/vendedlogs/states/CDEP_STATE_MACHINE_1-Logs
+
+aws.glue.IAMRoleARN = arn:aws:iam::955658629586:role/aws-glue
+
+aws.glue.glewDbName = dep_dtacatalog
+
+aws.glue.s3GlewTargetPath = s3://cdep/output/valid/
+
+aws.glue.glewCrawlerName = dep_crawler
+
+aws.athena.queryOuputLocation = s3://test-athena-query-dep/
+
+aws.preprocessor.fargateLogGroupName=DEP_Pre_Processor
+
+aws.preProcessLambdaFunctn=arn:aws:lambda:us-east-1:955658629586:function:dep_landing
+
+aws.preProcessZipStepFunction=arn:aws:states:us-east-1:955658629586:stateMachine:Cdep_preprocessor
+
+aws.pdfSteFunctnArn = arn:aws:states:us-east-1:955658629586:stateMachine:Cdep_Preprocess_PDF
+
+aws.zipSteFunctnArn = arn:aws:states:us-east-1:955658629586:stateMachine:Cdep_preprocessor
